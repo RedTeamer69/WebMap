@@ -21,7 +21,7 @@ You should use this with docker, just by sending this command:
 $ git clone https://github.com/RedTeamer69/WebMap.git
 $ cd WebMap
 $ docker build -t webmap:latest .
-$ docker run -d --name webmap -v ./nmapxml:/opt/xml -p 8000:8000 webmap:latest
+$ docker run -d --name webmap -v nmapxml:/opt/xml -p 8000:8000 webmap:latest
 ```
 
 ### Generate new access token
