@@ -1,8 +1,8 @@
 <p align="center">
-A Web Dashboard for Nmap XML Report
+A Web Dashboard for Nmap XML Report Red Team version
 </p>
 
-Current version: 2.3b
+Current version: 2.3c
 
 ## Table Of Contents
 - [Usage](#usage)
@@ -18,29 +18,18 @@ Current version: 2.3b
 ## Usage
 You should use this with docker, just by sending this command:
 ```bash
-$ mkdir /tmp/webmap
-$ docker run -d \
-         --name webmap \
-         -h webmap \
-         -p 8000:8000 \
-         -v /tmp/webmap:/opt/xml \
-         secureforest/webmap
-
-$ # now you can run Nmap and save the XML Report on /tmp/webmap
-$ nmap -sT -A -T4 -oX /tmp/webmap/myscan.xml 192.168.1.0/24
+$ git clone https://github.com/RedTeamer69/WebMap.git
+$ cd WebMap
+$ docker build -t webmap:latest .
+$ docker run -d --name webmap -v ./nmapxml:/opt/xml -p 8000:8000 webmap:latest
 ```
-Now point your browser to http://localhost:8000
 
-### Generate new token
+### Generate new access token
 In order to access to the WebMap dashboard, you need a token. You can create a new token with:
 ```bash
 $ docker exec -ti webmap /root/token
 ```
-
-### Quick and Dirty
-```bash
-$ curl -sL http://bit.ly/wmsetup | bash
-```
+Now point your browser to http://localhost:8000
 
 ### Upgrade from previous release
 ```bash
@@ -50,11 +39,16 @@ $ docker stop webmap
 $ # remove webmap container
 $ docker rm webmap
 
-$ # pull new image from dockerhub
-$ docker pull secureforest/webmap
+$ # change directory to git cloned version
+$ cd WebMap
 
-$ # run WebMap
-$ curl -sL http://bit.ly/wmsetup | bash
+$ # pull new change
+$ git pull
+
+$ # build new version
+$ docker build -t webmap:latest .
+$ docker run -d --name webmap -v ./nmapxml:/opt/xml -p 8000:8000 webmap:latest
+
 ```
 
 ### Run without Docker
@@ -80,6 +74,8 @@ You love WebMap and you know python? We need your help! This is what we want dep
 - [todo] Wiki: create WebMap User Guide on GitHub
 - [todo] Zaproxy: Perform web scan using the OWASP ZAP API
 
+## Changes on v2.3c
+- Small fixes due to repo fork
 
 ## Changes on v2.3b
 - Docker fixes
