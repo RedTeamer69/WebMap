@@ -1,20 +1,24 @@
-# WebMap
+# Fork of WebMap, patched by Redteamer69
 # -
-# https://github.com/SECUREFOREST/WebMap
+# Original repository https://github.com/SECUREFOREST/WebMap
 # Author: SECUREFOREST, Original version - theMiddle
 # -
-# Usage:
-#   $ cd /opt
-#   $ git clone https://github.com/SECUREFOREST/WebMap.git
-#   $ cd WebMap/docker
+# Build Redteamer69 version
+# 
+#   $ git clone https://github.com/RedTeamer69/WebMap.git
+#   $ cd WebMap
 #   $ docker build -t webmap:latest .
-#   $ docker run -d -v /opt/WebMap/docker/xml:/opt/xml -p 8000:8000 webmap:latest
-#
+#   $ docker run -d --name webmap -v ./nmapxml:/opt/xml -p 8000:8000 webmap:latest
+#   
 # Nmap Example:
-#   $ nmap -sT -A -oX /tmp/myscan.xml 192.168.1.0/24
-#   $ mv /tmp/myscan.xml /opt/WebMap/docker/xml
-#
+#   $ nmap -sT -A -oX ./nmapxml/myscan.xml 192.168.1.0/24
+#    
+# Generate access token
+#   $ docker exec -ti webmap /root/token
+# 
 # Now you can point your browser to http://localhost:8000
+#
+#
 #python3 python3-pip curl wget git wkhtmltopdf libssl1.0-dev vim nmap tzdata
 
 FROM ubuntu:focal
